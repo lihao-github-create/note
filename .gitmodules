@@ -1,0 +1,3 @@
+[submodule "os_note"]
+	path = os_note
+	url = git@github.com:lihao-github-create/os_note.git

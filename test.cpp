@@ -1,17 +1,38 @@
+#include <csignal>
+#include <cstdlib>
 #include <iostream>
-#include <typeinfo>
 
-class MyClass {
-public:
-    // 类的成员和方法
+class MyObject {
+ public:
+  MyObject() { std::cout << "MyObject constructed." << std::endl; }
+
+  ~MyObject() { std::cout << "MyObject destructed." << std::endl; }
 };
 
+MyObject* obj = nullptr;
+
+// 信号处理函数
+void sigint_handler(int signum) {
+  if (obj != nullptr) {
+    delete obj;  // 调用析构函数
+  }
+  std::cout << "Received SIGINT signal (Ctrl+C)." << std::endl;
+  std::exit(0);  // 确保退出程序
+}
+
 int main() {
-    MyClass obj;
+  obj = new MyObject();
 
-    // 使用typeid操作符获取类的名称
-    const std::type_info& typeInfo = typeid(obj);
-    std::cout << "Class name: " << typeInfo.name() << std::endl;
+  obj->~MyObject();
 
-    return 0;
+  // 注册信号处理函数
+  std::signal(SIGINT, sigint_handler);
+
+  std::cout << "Waiting for SIGINT signal..." << std::endl;
+
+  while (1) {
+    // 什么也不做
+  }
+
+  return 0;
 }
