@@ -7,3 +7,6 @@
 [submodule "autosar_note"]
 	path = autosar_note
 	url = git@github.com:lihao-github-create/autosar_note
+[submodule "Infra"]
+	path = Infra
+	url = git@github.com:lihao-github-create/Infra

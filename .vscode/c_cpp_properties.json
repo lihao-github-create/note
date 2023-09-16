@@ -3,7 +3,9 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/Infra/include",
+                "${workspaceFolder}/Infra/demo/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang-8",
