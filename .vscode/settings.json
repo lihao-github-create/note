@@ -61,6 +61,8 @@
         "mutex": "cpp",
         "stop_token": "cpp",
         "thread": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "regex": "c",
+        "valarray": "c"
     }
 }
