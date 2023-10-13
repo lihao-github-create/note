@@ -13,14 +13,14 @@ template <typename T>
 class Singleton {
 public:
     static T& getInstance() {
-        if (!instance.load(std::memory_order_acquire)) {
-            std::lock_guard<std::mutex> lock(mutex);
-            if (!instance.load(std::memory_order_relaxed)) {
+        if (!instance_.load(std::memory_order_acquire)) {
+            std::lock_guard<std::mutex> lock(mutex_);
+            if (!instance_.load(std::memory_order_relaxed)) {
                 T* temp = new T;
-                instance.store(temp, std::memory_order_release);
+                instance_.store(temp, std::memory_order_release);
             }
         }
-        return *instance.load(std::memory_order_relaxed);
+        return *instance_.load(std::memory_order_relaxed);
     }
 
     // 防止复制构造函数和赋值运算符被调用
@@ -31,14 +31,14 @@ private:
     // 私有构造函数，防止外部实例化
     Singleton() {}
 
-    static std::atomic<T*> instance;
-    static std::mutex mutex;
+    static std::atomic<T*> instance_;
+    static std::mutex mutex_;
 };
 
 template <typename T>
-std::atomic<T*> Singleton<T>::instance(nullptr);
+std::atomic<T*> Singleton<T>::instance_(nullptr);
 
 template <typename T>
-std::mutex Singleton<T>::mutex;
+std::mutex Singleton<T>::mutex_;
 
 ```
