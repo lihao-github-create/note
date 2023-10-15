@@ -4,7 +4,7 @@ using namespace std;
 struct M2 {  // bad: incomplete set of copy/move/destructor operations
  public:
   M2(){};
-  M2(M2 &&) = default;
+  // M2(M2 &&) = default;
   // ...
   // ... no copy or move operations ...
   ~M2() { delete[] rep; }
